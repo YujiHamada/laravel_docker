@@ -3,6 +3,7 @@
 ### www配下にLaravelプロジェクトの作成
 - composer create-project --prefer-dist laravel/laravel {プロジェクト名}
 - .envのDB周りの修正
+- nginx.confの*project_name*を変更
 
 ### docker-compose up -d
 これでdockerコンテナが立ち上がります。
@@ -24,3 +25,12 @@ docker-compose up -d --build
 ## 注意点
 ### composerコマンドやartisanコマンドはコンテナ内で実行すること
 Macなどhost環境に応じた挙動となるため注意
+
+
+## メモ
+- docker-compose.yml
+    - imageはローカル化リモートのもの
+    - volumeのdelegatedは[Use bind mounts](https://docs.docker.com/storage/bind-mounts/)を参照する。速度が遅いと思ったらここいじると早くなる可能性
+    - portはhost側で未使用のものを使うこと
+    - container_nameは他とかぶらないように
+    - depends_onは依存関係、依存先が起動してから起動することになる
